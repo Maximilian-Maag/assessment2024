@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './TabsComponent.css'
@@ -7,17 +9,6 @@ import './App.css';
 import projects from './projekte.json';
 var projectsArray: Project[] = [];
 var financeArray: Finance[] = [];
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 
 class Finance {
   id: number;
@@ -80,6 +71,11 @@ function findProjectProperty(searchStatement:string, property:string){
 
 function App() {
   ReadProjects(projects);
+  const [open, setOpen] = useState(false);
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const tabTitles = ['Finanzierung', 'Aufgabenplanung'];
   const goToNextTab = () => {
@@ -139,7 +135,12 @@ function App() {
           ))}
         </TabList>
         <TabPanel>
-          test
+          <div>
+            <button onClick={onOpenModal}>Open modal</button>
+            <Modal open={open} onClose={onCloseModal} center>
+              <h2>Simple centered modal</h2>
+            </Modal>
+          </div>
         </TabPanel>
         <TabPanel>
           <div>Ein super toller Text, den ich ganz alleine ohne KI geschrieben habe.</div>
