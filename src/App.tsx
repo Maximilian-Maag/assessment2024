@@ -136,9 +136,20 @@ function App() {
         </TabList>
         <TabPanel>
           <div>
-            <button onClick={onOpenModal}>Open modal</button>
+            <ul>
+              {financeArray.map((finance) => (
+                <li value={finance.id}>
+                  Bezeichnung: {finance.name}
+                  Höhe: {finance.ammount}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <button onClick={onOpenModal}>Finanzierung hinzufügen</button>
             <Modal open={open} onClose={onCloseModal} center>
-              <h2>Simple centered modal</h2>
+              <h2>Finanzierung</h2>
+              <p>Hier fehlt noch ein Formular</p>
             </Modal>
           </div>
         </TabPanel>
